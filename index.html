@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>Spot On!</title>
+    <meta name="description" content="A physics slingshot puzzle: land the aliens in the glowing spots and keep them there. Built with p5.js and Matter.js." />
+    <meta name="theme-color" content="#3ad3ff" />
+    <link rel="icon" href="assets/balls/blue.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="app">
+      <div id="stage" aria-label="Game view"></div>
+
+      <!-- Heads-up display -->
+      <header id="hud" class="hud" hidden>
+        <div class="hud__left">
+          <span id="hud-level" class="chip chip--level">1 · First Contact</span>
+          <span id="hud-target" class="hud__target"></span>
+        </div>
+        <div id="hud-spots" class="hud__spots" data-testid="spots" aria-label="Spots captured"></div>
+        <div class="hud__right">
+          <button id="restart-button" class="icon-button" type="button" title="Restart (R)" aria-label="Restart">↻</button>
+          <button id="mute-button" class="icon-button" type="button" title="Mute (M)" aria-label="Toggle sound" aria-pressed="false">🔊</button>
+          <button id="pause-button" class="icon-button" type="button" title="Pause (P)" aria-label="Pause">❚❚</button>
+        </div>
+      </header>
+
+      <div id="ball-panel" class="ball-panel" hidden>
+        <div id="ball-tray" class="ball-tray" data-testid="tray"></div>
+        <span id="ball-hint" class="ball-hint"></span>
+      </div>
+
+      <div id="toasts" class="toasts" aria-live="polite"></div>
+
+      <!-- Loading -->
+      <section id="loading-screen" class="screen screen--loading" aria-live="polite">
+        <div class="loading">
+          <p class="logo">Spot<span>On!</span></p>
+          <div class="loading__bar"><div id="loading-fill" class="loading__fill"></div></div>
+        </div>
+      </section>
+
+      <!-- Title -->
+      <section id="menu-screen" class="screen" hidden aria-labelledby="game-title">
+        <div class="panel panel--menu">
+          <p class="eyebrow">Visual Computing · Physics game</p>
+          <h1 id="game-title" class="logo">Spot<span>On!</span></h1>
+          <p class="lead">Fling the aliens with the slingshot and land them in the glowing spots. A ball has to stay inside for <strong>3 seconds</strong> to capture it. Capture every spot with as few balls as you can.</p>
+          <button id="play-button" class="button button--primary" type="button">Play</button>
+          <div class="controls">
+            <div class="control"><span class="key">Drag</span><span>Pull back and release to shoot</span></div>
+            <div class="control"><span class="key">Tap</span><span>Explode the green bomb ball mid-air</span></div>
+            <div class="control"><kbd>R</kbd><span>Restart</span><kbd>P</kbd><span>Pause</span><kbd>M</kbd><span>Mute</span><kbd>V</kbd><span>Physics view</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Level select -->
+      <section id="levels-screen" class="screen" hidden aria-labelledby="levels-title">
+        <div class="panel panel--levels">
+          <h2 id="levels-title" class="panel__title">Choose a level</h2>
+          <div id="level-cards" class="level-cards"></div>
+          <button id="levels-back-button" class="button button--ghost" type="button">Back</button>
+        </div>
+      </section>
+
+      <!-- Pause -->
+      <section id="pause-screen" class="screen" hidden aria-labelledby="pause-title">
+        <div class="panel">
+          <h2 id="pause-title" class="panel__title">Paused</h2>
+          <button id="resume-button" class="button button--primary" type="button">Resume</button>
+          <div class="button-row">
+            <button id="pause-restart-button" class="button" type="button">Restart</button>
+            <button id="pause-levels-button" class="button" type="button">Levels</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Result -->
+      <section id="result-screen" class="screen" hidden aria-labelledby="result-title">
+        <div class="panel">
+          <p id="result-badge" class="badge" hidden>New best!</p>
+          <h2 id="result-title" class="panel__title">Level complete!</h2>
+          <div id="result-stars" class="big-stars" data-testid="stars"></div>
+          <p id="result-subtitle" class="panel__subtitle"></p>
+          <button id="next-button" class="button button--primary" type="button">Next level</button>
+          <div class="button-row">
+            <button id="retry-button" class="button" type="button">Replay</button>
+            <button id="result-levels-button" class="button" type="button">Levels</button>
+          </div>
+        </div>
+      </section>
+
+      <noscript>Spot On! needs JavaScript to run.</noscript>
+    </main>
+
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/matter.min.js"></script>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
